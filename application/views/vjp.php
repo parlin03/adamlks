@@ -53,6 +53,7 @@
                                                     <TH>Kelurahan</th>
                                                     <TH>Kecamatan</th>
                                                     <TH>No Telpon</th>
+                                                    <TH>Jaring Program</th>
                                                     <TH>Tanggapan</th>
                                                     <TH>Aksi</th>
                                                 </tr>
@@ -71,6 +72,7 @@
                                                         <td><?= $m['namakel']; ?></td>
                                                         <td><?= $m['namakec']; ?></td>
                                                         <td><?= $m['nohp']; ?></td>
+                                                        <td><?= $m['program']; ?></td>
                                                         <td><?= $m['tanggapan']; ?></td>
                                                         <td class="text-center">
                                                             <a data-toggle="modal" data-target="#edit<?= $m['id']; ?>" class="btn btn-warning btn-circle" data-popup="tooltip" data-placement="top" title="Edit Data"><i class="fas fa-fw fa-edit" aria-hidden="true"></i></a>
@@ -128,6 +130,18 @@
                                                                             <label for="nohp" class="col-sm-3 col-form-label">No Telpon</label>
                                                                             <div class="col-sm-9">
                                                                                 <input type="text" class="form-control" id="nohp" name="nohp" value="<?= $m['nohp']; ?>" placeholder="No Telpon">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="program" class="col-sm-4 col-form-label">Jaring Program</label>
+                                                                            <div class="col-sm-8">
+                                                                                <select name="program" class="form-control">
+                                                                                    <option value="">-- Pilih --</option>
+                                                                                    <option value="Beasiswa PIP">Beasiswa PIP</option>
+                                                                                    <option value="Beasiswa KIP">Beasiswa KIP</option>
+                                                                                    <option value="BPUM">BPUM</option>
+                                                                                    <option value="Bedah Rumah">Bedah Rumah</option>
+                                                                                </select>
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
@@ -227,6 +241,18 @@
                         <label for="nohp" class="col-sm-3 col-form-label">No Telpon</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="nohp" name="nohp" placeholder="No Telpon">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="program" class="col-sm-4 col-form-label">Jaring Program</label>
+                        <div class="col-sm-8">
+                            <select name="program" class="form-control">
+                                <option value="">-- Pilih --</option>
+                                <option value="Beasiswa PIP">Beasiswa PIP</option>
+                                <option value="Beasiswa KIP">Beasiswa KIP</option>
+                                <option value="BPUM">BPUM</option>
+                                <option value="Bedah Rumah">Bedah Rumah</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">

@@ -23,6 +23,7 @@ class Verifikasi extends CI_Controller
         $this->form_validation->set_rules('nik', 'Nik', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('program', 'Program', 'required');
         $this->form_validation->set_rules('tanggapan', 'Tanggapan', 'required');
 
         $this->load->view('templates/header', $data);
@@ -61,6 +62,8 @@ class Verifikasi extends CI_Controller
         $this->form_validation->set_rules('nik', 'Nik', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('program', 'Program', 'required');
+        $this->form_validation->set_rules('tanggapan', 'Tanggapan', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('error', "Data Gagal Di Tambahkan");
@@ -73,6 +76,7 @@ class Verifikasi extends CI_Controller
                 'namakel' => $this->input->post('kelurahan'),
                 'namakec' => $this->input->post('kecamatan'),
                 'nohp'      => $this->input->post('nohp'),
+                'program'   => $this->input->post('program'),
                 'tanggapan' => $this->input->post('tanggapan'),
                 'user_id'   => $this->session->userdata('user_id')
             ];
@@ -97,6 +101,8 @@ class Verifikasi extends CI_Controller
         $this->form_validation->set_rules('nik', 'Nik', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
+        $this->form_validation->set_rules('program', 'Program', 'required');
+        $this->form_validation->set_rules('tanggapan', 'Tanggapan', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('error', "Data Gagal Di Tambahkan");
@@ -109,6 +115,7 @@ class Verifikasi extends CI_Controller
                 'namakel' => $this->input->post('kelurahan'),
                 'namakec' => $this->input->post('kecamatan'),
                 'nohp'      => $this->input->post('nohp'),
+                'program'   => $this->input->post('program'),
                 'tanggapan' => $this->input->post('tanggapan'),
                 'user_id'   => $this->session->userdata('user_id')
             ];
