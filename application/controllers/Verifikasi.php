@@ -65,7 +65,7 @@ class Verifikasi extends CI_Controller
     public function add()
     {
         $data['title'] = 'Door to Door Campaign';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array(); //arraynya sebaris
+        $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('user_id')])->row_array();
         $this->db->where('user_id', $this->session->userdata('user_id'));
         $this->db->order_by('id', 'ASC');
         $data['vjp'] = $this->db->get('lks_vjp')->result_array(); //array banyak
@@ -104,7 +104,7 @@ class Verifikasi extends CI_Controller
         // die;
         if (!isset($id)) redirect('verifikasi');
         $data['title'] = 'Door to Door Campaign';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array(); //arraynya sebaris
+        $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('user_id')])->row_array();
         $this->db->where('user_id', $this->session->userdata('user_id'));
         $this->db->order_by('id', 'ASC');
         $data['vjp'] = $this->db->get('lks_vjp')->result_array(); //array banyak
