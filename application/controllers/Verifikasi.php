@@ -9,16 +9,17 @@ class Verifikasi extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        // $this->load->model('Dtdc_model', 'm_dtdc');
+        $this->load->model('Verifikasi_model', 'verifikasi_model');
         // is_logged_in();
     }
     function index()
     {
         $data['title'] = 'Verifikasi Jaring Program';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array(); //arraynya sebaris
+        $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('user_id')])->row_array();
         $this->db->where('user_id', $this->session->userdata('user_id'));
         $this->db->order_by('id', 'ASC');
         $data['vjp'] = $this->db->get('lks_vjp')->result_array(); //array banyak
+        $data['kec'] = $this->verifikasi_model->getKecamatan();
 
         $this->form_validation->set_rules('nik', 'Nik', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
@@ -51,6 +52,16 @@ class Verifikasi extends CI_Controller
         //     redirect('vjp');
         // }
     }
+
+    function getKelurahanList()
+    {
+        // $idkec = $this->input->post('id', TRUE);
+        $postData = $this->input->post();
+        var_dump($postData);
+        $data = $this->verifikasi_model->getKelurahan($postData);
+        echo json_encode($data);
+    }
+
     public function add()
     {
         $data['title'] = 'Door to Door Campaign';

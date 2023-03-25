@@ -226,15 +226,20 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="kelurahan" class="col-sm-3 col-form-label">Kelurahan</label>
+                        <label for="kecamatan" class="col-sm-3 col-form-label">Kecamatan</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="kelurahan" name="kelurahan" placeholder="Kelurahan">
+                            <select class="form-control" name="kecamatan" id="kecamatan" required>
+                                <option value="">-- Pilih Kecamatan --</option>
+                                <?php foreach ($kec as $row) : ?>
+                                    <option value="<?php echo $row['idkec']; ?>"><?php echo $row['namakec']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="kecamatan" class="col-sm-3 col-form-label">Kecamatan</label>
+                        <label for="kelurahan" class="col-sm-3 col-form-label">Kelurahan</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="kecamatan" name="kecamatan" placeholder="Kecamatan">
+                            <input type="text" class="form-control" id="kelurahan" name="kelurahan" placeholder="Kelurahan">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -282,3 +287,46 @@
     </div>
 </div>
 <!-- End Modal Add New verifikasi -->
+
+<!-- Popper -->
+<!-- <script src="<?= base_url("assets/plugins/popper/popper.min.js") ?>"></script> -->
+
+<!-- Bootstrap -->
+<!-- <script src="<?= base_url("assets/plugins/bootstrap/js/bootstrap.min.js") ?>"></script> -->
+
+<!-- jQuery UI -->
+<!-- <script src="<?= base_url("assets/plugins/jquery-ui/jquery-ui.min.js") ?>"></script> -->
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        // baseURL variable
+        var baseURL = "<?php echo base_url(); ?>";
+        console.log(baseURL);
+        // City change
+        $('#kecamatan').change(function() {
+            var namakec = $(this).val();
+            console.log(namakec);
+            // AJAX request
+            $.ajax({
+                url: '<?= base_url() ?>verifikasi/getKelurahanList',
+                method: 'post',
+                data: {
+                    namakec: namakec
+                },
+                dataType: 'json',
+                success: function(response) {
+
+                    // Remove options
+                    $('#kelurahan').find('option').not(':first').remove();
+
+                    // Add options
+                    $.each(response, function(index, data) {
+                        $('#kelurahan').append('<option value="' + data['iddesa'] + '">' + data['namakel'] + '</option>');
+                    });
+                }
+            });
+
+        });
+    });
+</script> -->

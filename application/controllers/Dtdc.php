@@ -15,7 +15,7 @@ class Dtdc extends CI_Controller
     function index()
     {
         $data['title'] = 'Door to Door Campaign';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array(); //arraynya sebaris
+        $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('user_id')])->row_array();
         $this->db->where('user_id', $this->session->userdata('user_id'));
         $this->db->order_by('id', 'ASC');
         $data['dtdc'] = $this->db->get('lks_dtdc')->result_array(); //array banyak
@@ -53,7 +53,7 @@ class Dtdc extends CI_Controller
     public function add()
     {
         $data['title'] = 'Door to Door Campaign';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array(); //arraynya sebaris
+        $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('user_id')])->row_array();
         $this->db->where('user_id', $this->session->userdata('user_id'));
         $this->db->order_by('id', 'ASC');
         $data['dtdc'] = $this->db->get('lks_dtdc')->result_array(); //array banyak
@@ -89,7 +89,7 @@ class Dtdc extends CI_Controller
         // die;
         if (!isset($id)) redirect('dtdc');
         $data['title'] = 'Door to Door Campaign';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array(); //arraynya sebaris
+        $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('user_id')])->row_array();
         $this->db->where('user_id', $this->session->userdata('user_id'));
         $this->db->order_by('id', 'ASC');
         $data['dtdc'] = $this->db->get('lks_dtdc')->result_array(); //array banyak

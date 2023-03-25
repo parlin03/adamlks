@@ -16,7 +16,7 @@ class Home extends CI_Controller
     public function index()
     {
         $data['title'] = 'Dashboard';
-        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('user_id')])->row_array();
 
         // $data['maingraph'] = $this->dashboard->mainGraph();
         // $data['graphpanakukkang'] = $this->dashboard->graphPanakukkang();
@@ -26,5 +26,4 @@ class Home extends CI_Controller
         $this->load->view('home/index', $data);
         $this->load->view('templates/footer');
     }
-
 }

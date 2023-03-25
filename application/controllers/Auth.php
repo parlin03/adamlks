@@ -10,9 +10,28 @@ class Auth extends CI_Controller
     }
     public function index()
     {
-        if ($this->session->userdata('email')) {
-            redirect(base_url('home'));
+        if ($this->session->userdata('user_id')) {
+            if ($this->session->userdata('role_id') == 1) {
+                redirect(base_url('home'));
+            } elseif ($this->session->userdata('role_id') == 2) {
+                redirect('home');
+            } elseif ($this->session->userdata('role_id') == 3) {
+                redirect('verifikasi');
+            } elseif ($this->session->userdata('role_id') == 4) {
+                // var_dump($this->session->userdata('username'));
+                // die;
+                redirect('verifikasi');
+            } else {
+                $this->session->unset_userdata('username');
+                $this->session->unset_userdata('email');
+                $this->session->unset_userdata('role_id');
+                $this->session->unset_userdata('user_id');
+
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role ="alert">You are not authorize!</div>');
+                redirect('auth');
+            }
         }
+
 
         // $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'required|trim');
@@ -32,7 +51,11 @@ class Auth extends CI_Controller
         $email = $this->input->post('email');
         $password = $this->input->post('password');
 
-        $user = $this->db->get_where('user', ['email' => $email])->row_array();
+        $wherecond = " ( username ='" . $email . "' OR email='" . $email . "')  ";
+        $this->db->where($wherecond);
+        $user = $this->db->get('user')->row_array();
+
+        // $user = $this->db->get_where('user', ['email' => $email])->row_array();
         // var_dump($user);
         // die;
         // jika user ada
@@ -41,6 +64,7 @@ class Auth extends CI_Controller
             if ($user['is_active'] == 1) {
                 if (password_verify($password, $user['password'])) {
                     $data = [
+                        'username' => $user['username'],
                         'email' => $user['email'],
                         'role_id' => $user['role_id'],
                         'user_id' => $user['id']
@@ -55,8 +79,10 @@ class Auth extends CI_Controller
                     } elseif ($user['role_id'] == 4) {
                         redirect('verifikasi');
                     } else {
+                        $this->session->unset_userdata('username');
                         $this->session->unset_userdata('email');
                         $this->session->unset_userdata('role_id');
+                        $this->session->unset_userdata('user_id');
 
                         $this->session->set_flashdata('message', '<div class="alert alert-success" role ="alert">You are not authorize!</div>');
                         redirect('auth');
@@ -81,9 +107,12 @@ class Auth extends CI_Controller
         }
 
         $this->form_validation->set_rules('name', 'Name', 'required|trim');
-        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
-            'is_unique' => 'This email has already registered'
+        $this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[user.username]', [
+            'is_unique' => 'This username has already registered'
         ]);
+        // $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
+        //     'is_unique' => 'This email has already registered'
+        // ]);
         $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[6]|matches[password2]');
         $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
         if ($this->form_validation->run() == false) {
@@ -95,6 +124,7 @@ class Auth extends CI_Controller
             $email = $this->input->post('email', true);
             $data = [
                 'name' => htmlentities($this->input->post('name', true)),
+                'username' => htmlentities($this->input->post('username', true)),
                 'email' => htmlspecialchars($email),
                 'image' => 'default.png',
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
@@ -105,17 +135,16 @@ class Auth extends CI_Controller
             ];
 
             // siapkan token
-            $token = base64_encode(openssl_random_pseudo_bytes(32));
-            $user_token = [
-                'email' => $email,
-                'token' => $token,
-                'date_created' => time()
-
-            ];
+            // $token = base64_encode(openssl_random_pseudo_bytes(32));
+            // $user_token = [
+            //     'email' => $email,
+            //     'token' => $token,
+            //     'date_created' => time()
+            // ];
 
             $this->db->insert('user', $data);
-            $this->db->insert('user_token', $user_token);
-            $this->_sendEmail($token, 'verify');
+            // $this->db->insert('user_token', $user_token);
+            // $this->_sendEmail($token, 'verify');
 
 
             $this->session->set_flashdata('message', '<div class="alert alert-success" role ="alert">Congratulation your account has been created. Please activate your account!</div>');
@@ -200,8 +229,10 @@ class Auth extends CI_Controller
 
     public function logout()
     {
+        $this->session->unset_userdata('username');
         $this->session->unset_userdata('email');
         $this->session->unset_userdata('role_id');
+        $this->session->unset_userdata('user_id');
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role ="alert">You have been logged out!</div>');
         redirect('auth');
