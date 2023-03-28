@@ -9,6 +9,9 @@ class Dtdc extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if (empty($this->session->userdata('user_id'))) {
+            redirect(site_url(), 'refresh');
+        }
         $this->load->model('Dtdc_model', 'm_dtdc');
         // is_logged_in();
     }
