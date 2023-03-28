@@ -96,7 +96,7 @@
                                                                 </div>
                                                                 <form action="<?= base_url('verifikasi/edit/') . $m['id']; ?>" method="POST">
                                                                     <div class="modal-body">
-                                                                        <input type="hidden" readonly value="<?= $m['id']; ?>" name="id" class="form-control">
+                                                                        <input type="text" readonly value="<?= $m['id']; ?>" name="id" class="form-control">
                                                                         <div class="form-group row">
                                                                             <label for="nik" class="col-sm-3 col-form-label">NIK</label>
                                                                             <div class="col-sm-9">
@@ -124,7 +124,13 @@
                                                                         <div class="form-group row">
                                                                             <label for="kecamatan" class="col-sm-3 col-form-label">Kecamatan</label>
                                                                             <div class="col-sm-9">
-                                                                                <input type="text" class="form-control" id="kecamatan" name="kecamatan" value="<?= $m['namakec']; ?>" placeholder="Kecamatan">
+                                                                                <select class="form-control" name="kecamatan" id="kecamatan" required>
+                                                                                    <option value="">-- Pilih Kecamatan --</option>
+                                                                                    <?php foreach ($kec as $row) : ?>
+                                                                                        <option value="<?php echo $row['namakec']; ?>" <?= ($m['namakec'] == $row['namakec']) ?  'selected' : ''; ?>><?php echo $row['namakec']; ?></option>
+                                                                                    <?php endforeach; ?>
+                                                                                </select>
+                                                                                <!-- <input type="text" class="form-control" id="kecamatan" name="kecamatan" value="<?= $m['namakec']; ?>" placeholder="Kecamatan"> -->
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
@@ -138,10 +144,10 @@
                                                                             <div class="col-sm-8">
                                                                                 <select name="program" class="form-control">
                                                                                     <option value="">-- Pilih --</option>
-                                                                                    <option value="Beasiswa PIP">Beasiswa PIP</option>
-                                                                                    <option value="Beasiswa KIP">Beasiswa KIP</option>
-                                                                                    <option value="BPUM">BPUM</option>
-                                                                                    <option value="Bedah Rumah">Bedah Rumah</option>
+                                                                                    <option value="Beasiswa PIP" <?= ($m['program'] == 'Beasiswa PIP') ?  'selected' : ''; ?>>Beasiswa PIP</option>
+                                                                                    <option value="Beasiswa KIP" <?= ($m['program'] == 'Beasiswa KIP') ?  'selected' : ''; ?>>Beasiswa KIP</option>
+                                                                                    <option value="BPUM" <?= ($m['program'] == 'BPUM') ?  'selected' : ''; ?>>BPUM</option>
+                                                                                    <option value="Bedah Rumah" <?= ($m['program'] == 'Bedah Rumah') ?  'selected' : ''; ?>>Bedah Rumah</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>

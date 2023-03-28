@@ -67,7 +67,7 @@
                                             <select class="form-control" name="kecamatan" id="kecamatan" required>
                                                 <option value="">-- Pilih Kecamatan --</option>
                                                 <?php foreach ($kec as $row) : ?>
-                                                    <option value="<?php echo $row['idkec']; ?>"><?php echo $row['namakec']; ?></option>
+                                                    <option value="<?php echo $row['namakec']; ?>"><?php echo $row['namakec']; ?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </div>

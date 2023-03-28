@@ -17,12 +17,13 @@ class Verifikasi extends CI_Controller
         $data['title'] = 'Verifikasi Jaring Program';
         $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('user_id')])->row_array();
 
-        $this->db->join('kec', 'kec.idkec = lks_vjp.namakec');
+
         $this->db->where('user_id', $this->session->userdata('user_id'));
         $this->db->order_by('lks_vjp.id', 'ASC');
         $query = $this->db->get('lks_vjp');
 
         $data['vjp'] = $query->result_array(); //array banyak
+        $data['kec'] = $this->verifikasi_model->getKecamatan();
 
         $this->form_validation->set_rules('nik', 'Nik', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
@@ -114,7 +115,7 @@ class Verifikasi extends CI_Controller
         }
     }
 
-    public function edit($id = null)
+    public function edit($id)
     {
         // var_dump($id);
         // die;
@@ -123,34 +124,24 @@ class Verifikasi extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('user_id')])->row_array();
         $this->db->where('user_id', $this->session->userdata('user_id'));
         $this->db->order_by('id', 'ASC');
-        $data['vjp'] = $this->db->get('lks_vjp')->result_array(); //array banyak
+        // $data['vjp'] = $this->db->get('lks_vjp')->result_array(); //array banyak
 
-        $this->form_validation->set_rules('nik', 'Nik', 'required');
-        $this->form_validation->set_rules('nama', 'Nama', 'required');
-        $this->form_validation->set_rules('alamat', 'Alamat', 'required');
-        $this->form_validation->set_rules('program', 'Program', 'required');
-        $this->form_validation->set_rules('tanggapan', 'Tanggapan', 'required');
 
-        if ($this->form_validation->run() == false) {
-            $this->session->set_flashdata('error', "Data Gagal Di Tambahkan");
-            redirect('verifikasi');
-        } else {
-            $data = [
-                'nik'       => $this->input->post('nik'),
-                'nama'      => $this->input->post('nama'),
-                'alamat'    => $this->input->post('alamat'),
-                'namakel' => $this->input->post('kelurahan'),
-                'namakec' => $this->input->post('kecamatan'),
-                'nohp'      => $this->input->post('nohp'),
-                'program'   => $this->input->post('program'),
-                'tanggapan' => $this->input->post('tanggapan'),
-                'user_id'   => $this->session->userdata('user_id')
-            ];
-            $this->db->where('id', $id);
-            $this->db->update('lks_vjp', $data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role ="alert">verifikasi data edited!</div>');
-            redirect('verifikasi');
-        }
+        $data = [
+            'nik'       => $this->input->post('nik'),
+            'nama'      => $this->input->post('nama'),
+            'alamat'    => $this->input->post('alamat'),
+            'namakel' => $this->input->post('kelurahan'),
+            'namakec' => $this->input->post('kecamatan'),
+            'nohp'      => $this->input->post('nohp'),
+            'program'   => $this->input->post('program'),
+            'tanggapan' => $this->input->post('tanggapan'),
+            'user_id'   => $this->session->userdata('user_id')
+        ];
+        $this->db->where('id', $id);
+        $this->db->update('lks_vjp', $data);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role ="alert">verifikasi data edited!</div>');
+        redirect('verifikasi');
     }
 
     public function delete($id)
