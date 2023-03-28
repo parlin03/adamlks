@@ -79,6 +79,12 @@
                                             <!-- <select class="form-control" name="kelurahan" id="kelurahan" required>
                                                 <option>-- Pilih Kelurahan --</option>
                                             </select> -->
+                                            <!-- <select name="kelurahan" id="kelurahan" class="form-control">
+                                                <option value="">Pilih Kelurahan</option>
+                                                <?php
+
+                                                ?>
+                                            </select> -->
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -156,36 +162,28 @@
 <!-- jQuery UI -->
 <!-- <script src="<?= base_url("assets/plugins/jquery-ui/jquery-ui.min.js") ?>"></script> -->
 
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        // baseURL variable
-        var baseURL = "<?php echo base_url(); ?>";
-        // console.log(baseURL);
-        // City change
+        base_url = '<?= base_url() ?>';
+        //request data kabupaten
         $('#kecamatan').change(function() {
-            var namakec = $(this).val();
-            // console.log(namakec);
-            // AJAX request
-            $.ajax({
-                url: '<?= base_url() ?>verifikasi/getKelurahanList',
-                method: 'post',
-                data: {
-                    namakec: namakec
-                },
-                dataType: 'json',
-                success: function(response) {
-
-                    // Remove options
-                    $('#kelurahan').find('option').not(':first').remove();
-
-                    // Add options
-                    $.each(response, function(index, data) {
-                        $('#kelurahan').append('<option value="' + data['iddesa'] + '">' + data['namakel'] + '</option>');
-                    });
-                }
-            });
-
+            var idkec = $('#kecamatan').val(); //ambil value id dari provinsi
+            var url = "<?= base_url('verifikasi/getKelurahanList') ?>";
+            console.log(idkec);
+            if (idkec != '') {
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: {
+                        'idkec': idkec
+                    },
+                    success: function(data) {
+                        // console.log(data);
+                        $('#kelurahan').html(data)
+                    }
+                });
+            }
         });
     });
 </script>

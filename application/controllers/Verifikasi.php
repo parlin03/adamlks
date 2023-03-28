@@ -16,10 +16,13 @@ class Verifikasi extends CI_Controller
     {
         $data['title'] = 'Verifikasi Jaring Program';
         $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('user_id')])->row_array();
-        $this->db->join('kec', 'lks_vjp.namakec=kec.idkec');
+
+        $this->db->join('kec', 'kec.idkec = lks_vjp.namakec');
         $this->db->where('user_id', $this->session->userdata('user_id'));
         $this->db->order_by('lks_vjp.id', 'ASC');
-        $data['vjp'] = $this->db->get('lks_vjp')->result_array(); //array banyak
+        $query = $this->db->get('lks_vjp');
+
+        $data['vjp'] = $query->result_array(); //array banyak
 
         $this->form_validation->set_rules('nik', 'Nik', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
@@ -56,11 +59,15 @@ class Verifikasi extends CI_Controller
     function getKelurahanList()
     {
         // $idkec = $this->input->post('id', TRUE);
-        $postData = $this->input->post();
-        var_dump($postData);
-        die;
-        $data = $this->verifikasi_model->getKelurahan($postData);
-        echo json_encode($data);
+        // $postData = $this->input->post();
+        // var_dump($postData);
+        // die;
+        // $data = $this->verifikasi_model->getKelurahan($postData);
+        // echo json_encode($data);
+
+        if ($this->input->post('idkec')) {
+            echo $this->verifikasi_model->getKelurahan($this->input->post('idkec'));
+        }
     }
 
     public function add()
@@ -112,7 +119,7 @@ class Verifikasi extends CI_Controller
         // var_dump($id);
         // die;
         if (!isset($id)) redirect('verifikasi');
-        $data['title'] = 'Door to Door Campaign';
+        $data['title'] = 'Verifikasi Jaring Program';
         $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('user_id')])->row_array();
         $this->db->where('user_id', $this->session->userdata('user_id'));
         $this->db->order_by('id', 'ASC');

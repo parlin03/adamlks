@@ -21,7 +21,6 @@ class Home extends CI_Controller
         // $data['graphpanakukkang'] = $this->dashboard->graphPanakukkang();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('templates/sidebar', $data);
         $this->load->view('home/index', $data);
         $this->load->view('templates/footer');
     }

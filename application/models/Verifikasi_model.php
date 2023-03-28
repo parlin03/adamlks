@@ -25,17 +25,34 @@ class Verifikasi_model extends CI_Model
         return $response;
     }
 
-    function getKelurahan($postData)
+    // function getKelurahan($postData)
+    // {
+
+    //     $response = array();
+
+    //     // Select record
+    //     $this->db->select('iddesa,namakel');
+    //     $this->db->where('idkec', $postData['namakec']);
+    //     $q = $this->db->get('kel');
+    //     $response = $q->result_array();
+
+    //     return $response;
+    // }
+
+    function getKelurahan($idkec)
     {
+        //ambil data kabupaten berdasarkan id provinsi yang dipilih
+        $this->db->where('idkec', $idkec);
+        $this->db->order_by('idkel', 'ASC');
+        $query = $this->db->get('kel');
 
-        $response = array();
+        $output = '<option value="">-- Pilih Kabupaten --</option>';
 
-        // Select record
-        $this->db->select('iddesa,namakel');
-        $this->db->where('idkec', $postData['namakec']);
-        $q = $this->db->get('kel');
-        $response = $q->result_array();
-
-        return $response;
+        //looping data
+        foreach ($query->result() as $row) {
+            $output .= '<option value="' . $row->id . '">' . $row->name . '</option>';
+        }
+        //return data kabupaten
+        return $output;
     }
 }
