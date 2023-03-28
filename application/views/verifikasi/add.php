@@ -76,6 +76,9 @@
                                         <label for="kelurahan" class="col-md-4 col-form-label">Kelurahan</label>
                                         <div class="col-md-8">
                                             <input type="text" class="form-control" id="kelurahan" name="kelurahan" placeholder="Kelurahan">
+                                            <!-- <select class="form-control" name="kelurahan" id="kelurahan" required>
+                                                <option>-- Pilih Kelurahan --</option>
+                                            </select> -->
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -153,16 +156,16 @@
 <!-- jQuery UI -->
 <!-- <script src="<?= base_url("assets/plugins/jquery-ui/jquery-ui.min.js") ?>"></script> -->
 
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
 <script type="text/javascript">
     $(document).ready(function() {
         // baseURL variable
         var baseURL = "<?php echo base_url(); ?>";
-        console.log(baseURL);
+        // console.log(baseURL);
         // City change
         $('#kecamatan').change(function() {
             var namakec = $(this).val();
-            console.log(namakec);
+            // console.log(namakec);
             // AJAX request
             $.ajax({
                 url: '<?= base_url() ?>verifikasi/getKelurahanList',
@@ -185,4 +188,4 @@
 
         });
     });
-</script> -->
+</script>

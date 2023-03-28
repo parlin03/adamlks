@@ -58,6 +58,7 @@ class Verifikasi extends CI_Controller
         // $idkec = $this->input->post('id', TRUE);
         $postData = $this->input->post();
         var_dump($postData);
+        die;
         $data = $this->verifikasi_model->getKelurahan($postData);
         echo json_encode($data);
     }

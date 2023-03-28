@@ -32,7 +32,7 @@ class Verifikasi_model extends CI_Model
 
         // Select record
         $this->db->select('iddesa,namakel');
-        $this->db->where('namakec', $postData['namakec']);
+        $this->db->where('idkec', $postData['namakec']);
         $q = $this->db->get('kel');
         $response = $q->result_array();
 
