@@ -16,10 +16,10 @@ class Verifikasi extends CI_Controller
     {
         $data['title'] = 'Verifikasi Jaring Program';
         $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('user_id')])->row_array();
+        $this->db->join('kec', 'lks_vjp.namakec=kec.idkec');
         $this->db->where('user_id', $this->session->userdata('user_id'));
-        $this->db->order_by('id', 'ASC');
+        $this->db->order_by('lks_vjp.id', 'ASC');
         $data['vjp'] = $this->db->get('lks_vjp')->result_array(); //array banyak
-        $data['kec'] = $this->verifikasi_model->getKecamatan();
 
         $this->form_validation->set_rules('nik', 'Nik', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
@@ -30,7 +30,7 @@ class Verifikasi extends CI_Controller
         $this->load->view('templates/header', $data);
         // $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('vjp', $data);
+        $this->load->view('verifikasi/index', $data);
         $this->load->view('templates/footer');
 
 
@@ -70,15 +70,23 @@ class Verifikasi extends CI_Controller
         $this->db->order_by('id', 'ASC');
         $data['vjp'] = $this->db->get('lks_vjp')->result_array(); //array banyak
 
+        $data['kec'] = $this->verifikasi_model->getKecamatan();
+
+
         $this->form_validation->set_rules('nik', 'Nik', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('alamat', 'Alamat', 'required');
         $this->form_validation->set_rules('program', 'Program', 'required');
         $this->form_validation->set_rules('tanggapan', 'Tanggapan', 'required');
+        $this->load->view('templates/header', $data);
+        // $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('verifikasi/add', $data);
+        $this->load->view('templates/footer');
 
         if ($this->form_validation->run() == false) {
             $this->session->set_flashdata('error', "Data Gagal Di Tambahkan");
-            redirect('verifikasi');
+            // redirect('verifikasi');
         } else {
             $data = [
                 'nik'       => $this->input->post('nik'),
@@ -93,7 +101,7 @@ class Verifikasi extends CI_Controller
             ];
 
             $this->db->insert('lks_vjp', $data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role ="alert">New vjp added!</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role ="alert">New Verifikasi added!</div>');
             redirect('verifikasi');
         }
     }

@@ -36,7 +36,8 @@
                             <!-- notif sukses -->
                             <?= $this->session->flashdata('message'); ?>
                             <div class="row justify-content-end">
-                                <a href="" class="btn btn-primary" data-toggle="modal" data-target="#newVerifikasiModal"> Add New Verifikasi</a>
+                                <a href="<?= base_url('verifikasi/add') ?>" class="btn btn-primary"> Add New Verifikasi</a>
+                                <!-- <a href="" class="btn btn-primary" data-toggle="modal" data-target="#newVerifikasiModal"> Add New Verifikasi</a> -->
                             </div>
                         </div>
                         <div class="card-body">
