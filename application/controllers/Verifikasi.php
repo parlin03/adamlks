@@ -64,7 +64,7 @@ class Verifikasi extends CI_Controller
 
     public function add()
     {
-        $data['title'] = 'Door to Door Campaign';
+        $data['title'] = 'Verifikasi Jaring Program';
         $data['user'] = $this->db->get_where('user', ['id' => $this->session->userdata('user_id')])->row_array();
         $this->db->where('user_id', $this->session->userdata('user_id'));
         $this->db->order_by('id', 'ASC');

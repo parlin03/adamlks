@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark"><?= $title; ?></h1>
+                    <!-- <h1 class="m-0 text-dark"><?= $title; ?></h1> -->
                 </div><!-- /.col -->
                 <!-- <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -25,7 +25,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <!-- <h5 class="card-title">Monthly Recap Report</h5> -->
+                            <h5 class="card-title">Verifikasi Jaring Program</h5>
                             <!-- notif error -->
                             <!-- <?= form_error('add', '<div class="alert alert-danger" role ="alert">', '</div>'); ?> -->
                             <?php if (validation_errors()) : ?>
