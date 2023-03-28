@@ -96,7 +96,7 @@
                                                                 </div>
                                                                 <form action="<?= base_url('verifikasi/edit/') . $m['id']; ?>" method="POST">
                                                                     <div class="modal-body">
-                                                                        <input type="text" readonly value="<?= $m['id']; ?>" name="id" class="form-control">
+                                                                        <input type="hidden" readonly value="<?= $m['id']; ?>" name="id" class="form-control">
                                                                         <div class="form-group row">
                                                                             <label for="nik" class="col-sm-3 col-form-label">NIK</label>
                                                                             <div class="col-sm-9">
