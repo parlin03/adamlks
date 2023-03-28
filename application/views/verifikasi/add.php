@@ -115,10 +115,10 @@
                                     </div>
                                     <div class="card-footer">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="row col-md-6">
                                                 <a class="btn btn-secondary" href="<?= base_url('verifikasi') ?>">Close</a>
                                             </div>
-                                            <div class="col-md-6 justify-content-end">
+                                            <div class="row justify-content-end">
                                                 <button type="submit" class="btn btn-primary">Add</button>
                                             </div>
                                         </div>
@@ -141,20 +141,7 @@
 <!-- /.content-wrapper -->
 
 
-<!-- Modal Add New verifikasi -->
-<div class="modal fade" id="newVerifikasiModal" tabindex="-1" aria-labelledby="newVerifikasiModalLabel" aria-hidden="true">
-    <div class="modal-dialog  modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title" id="newVerifikasiModalLabel">Add New Verifikasi</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-            </div>
 
-        </div>
-    </div>
-</div>
 <!-- End Modal Add New verifikasi -->
 
 <!-- Popper -->
